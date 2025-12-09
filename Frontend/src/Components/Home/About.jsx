@@ -31,7 +31,6 @@ const About = () => {
         <section ref={sectionRef} className="w-full py-20">
             <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-10">
 
-                {/* Left Image */}
                 <div
                     className={`lg:w-1/2 flex justify-center bg-[rgb(247,248,249)] rounded-xl
                         transition-all duration-700 ease-out
@@ -44,7 +43,6 @@ const About = () => {
                     />
                 </div>
 
-                {/* Right Content */}
                 <div
                     className={`lg:w-1/2 transition-all duration-700 ease-out delay-200
                         ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
@@ -56,19 +54,16 @@ const About = () => {
                         </button>
                     </Link>
 
-                    {/* Updated Heading */}
                     <h2 className="mb-6 max-w-xl text-3xl font-semibold text-default-900 animate-fadeUp">
                         Fast, Fresh & Delivered <br /> Straight to Your Doorstep.
                     </h2>
 
-                    {/* Updated Paragraph */}
                     <p className="mb-16 max-w-2xl font-medium text-default-500 xl:mb-20 animate-fadeUp delay-100">
                         We bring your favorite meals right to you — hot, fresh, and full of flavor.
                         From quick snacks to full meals, our delivery ensures top-quality food prepared
                         with care and delivered with speed.
                     </p>
 
-                    {/* Cards Section */}
                     <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                         <div className="shadow-md p-6 rounded-xl border border-transparent hover:border-orange-400 transition-all duration-500 animate-card">
                             <ShoppingBagIcon className="w-10 h-10 text-orange-500 mb-3" />
@@ -87,7 +82,6 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* Founder Section */}
                     <div className="flex items-center gap-4 mt-10 animate-fadeUp delay-300">
                         <img
                             src={founder}
@@ -103,7 +97,6 @@ const About = () => {
                 </div>
             </div>
 
-            {/* Tailwind Animations */}
             <style>
                 {`
                 @keyframes fadeUp {

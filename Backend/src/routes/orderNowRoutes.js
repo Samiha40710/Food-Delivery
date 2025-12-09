@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const OrderNow = require("../models/OrderNow");
 
-// POST new order
 router.post("/", async (req, res) => {
   const { customerName, email, phone, address, dish, quantity, total } = req.body;
   if (!customerName || !email || !phone || !address || !dish || !total) {
@@ -19,7 +18,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET all orders
 router.get("/", async (req, res) => {
   try {
     const orders = await OrderNow.find();
@@ -29,7 +27,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET single order by ID
 router.get("/:id", async (req, res) => {
   try {
     const order = await OrderNow.findById(req.params.id);

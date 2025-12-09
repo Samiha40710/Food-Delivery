@@ -1,27 +1,37 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Menu = () => {
-  const [active, setActive] = useState("Home");
-  const hoverTextColor = "hover:text-[rgb(245,130,32)]";
-  const activeTextColor = "text-[rgb(245,130,32)]";
+  const location = useLocation(); 
+  const current = location.pathname;
+
+  const linkClasses = (path) =>
+    current === path
+      ? "text-[rgb(245,130,32)]"       // active
+      : "hover:text-[rgb(245,130,32)]"; // hover
+
+  const scrollTop = () => window.scrollTo(0, 0);
 
   return (
     <ul className="hidden md:flex items-center gap-6 font-medium relative">
-      <li className={`cursor-pointer ${active === "Home" ? activeTextColor : hoverTextColor}`} onClick={() => setActive("Home")}>
-        <Link to="/">Home</Link>
+      <li className={linkClasses("/")}>
+        <Link to="/" onClick={scrollTop}>Home</Link>
       </li>
-      <li className={`cursor-pointer ${active === "FoodMenu" ? activeTextColor : hoverTextColor}`} onClick={() => setActive("FoodMenu")}>
-        <Link to="/food-menu">Food Menu</Link>
+
+      <li className={linkClasses("/food-menu")}>
+        <Link to="/food-menu" onClick={scrollTop}>Food Menu</Link>
       </li>
-      <li className={`cursor-pointer ${active === "MegaMenu" ? activeTextColor : hoverTextColor}`} onClick={() => setActive("MegaMenu")}>
-        <Link to="/mega-menu">Mega Menu</Link>
+
+      <li className={linkClasses("/mega-menu")}>
+        <Link to="/mega-menu" onClick={scrollTop}>Mega Menu</Link>
       </li>
-      <li className={`cursor-pointer ${active === "About" ? activeTextColor : hoverTextColor}`} onClick={() => setActive("About")}>
-        <Link to="/about">About</Link>
+
+      <li className={linkClasses("/about")}>
+        <Link to="/about" onClick={scrollTop}>About</Link>
       </li>
-      <li className={`cursor-pointer ${active === "Contact" ? activeTextColor : hoverTextColor}`} onClick={() => setActive("Contact")}>
-        <Link to="/contact">Contact</Link>
+
+      <li className={linkClasses("/contact")}>
+        <Link to="/contact" onClick={scrollTop}>Contact</Link>
       </li>
     </ul>
   );

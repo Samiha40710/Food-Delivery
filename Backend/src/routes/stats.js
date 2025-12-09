@@ -2,10 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Stats = require("../models/Stats");
 
-// GET dashboard stats
 router.get("/dashboard", async (req, res) => {
   try {
-    // Agar DB me stats available nahi hain to default create kar lein
     let stats = await Stats.findOne();
     if (!stats) {
       stats = new Stats({

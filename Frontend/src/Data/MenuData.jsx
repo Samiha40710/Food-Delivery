@@ -1,52 +1,22 @@
 // src/components/MenuData.js
 
 import Brownie from "../assets/images/Bakery/Brownie.webp";
-import Brownie2 from "../assets/images/Bakery/Brownie2.webp";
-import Brownie3 from "../assets/images/Bakery/Brownie3.webp";
 import CarrotCake from "../assets/images/Bakery/CarrotCake.webp";
-import CarrotCake2 from "../assets/images/Bakery/CarrotCake2.webp";
-import CarrotCake3 from "../assets/images/Bakery/CarrotCake3.webp";
 import Muffin from "../assets/images/Bakery/Muffin.webp";
-import Muffin2 from "../assets/images/Bakery/Muffin2.webp";
-import Muffin3 from "../assets/images/Bakery/Muffin3.webp";
 import Croissant from "../assets/images/Bakery/Croissant.webp";
-import Croissant2 from "../assets/images/Bakery/Croissant2.webp";
-import Croissant3 from "../assets/images/Bakery/Croissant3.webp";
 import DanishPastry from "../assets/images/Bakery/DanishPastry.jpg";
-import DanishPastry2 from "../assets/images/Bakery/DanishPastry2.jpg";
-import DanishPastry3 from "../assets/images/Bakery/DanishPastry3.jpg";
 
 import BeefBurger from "../assets/images/Burger/BeefBurger.webp";
-import BeefBurger2 from "../assets/images/Burger/BeefBurger2.webp";
-import BeefBurger3 from "../assets/images/Burger/BeefBurger3.webp";
 import ChickenBurger from "../assets/images/Burger/ChickenBurger.webp";
-import ChickenBurger2 from "../assets/images/Burger/ChickenBurger2.webp";
-import ChickenBurger3 from "../assets/images/Burger/ChickenBurger3.webp";
 import CheeseBurger from "../assets/images/Burger/CheeseBurger.webp";
-import CheeseBurger2 from "../assets/images/Burger/CheeseBurger2.webp";
-import CheeseBurger3 from "../assets/images/Burger/CheeseBurger3.webp";
 import VeggieBurger from "../assets/images/Burger/VeggieBurger.webp";
-import VeggieBurger2 from "../assets/images/Burger/VeggieBurger2.webp";
-import VeggieBurger3 from "../assets/images/Burger/VeggieBurger3.webp";
 import BaconBurger from "../assets/images/Burger/BaconBurger.webp";
-import BaconBurger2 from "../assets/images/Burger/BaconBurger2.webp";
-import BaconBurger3 from "../assets/images/Burger/BaconBurger3.webp";
 
 import Espresso from "../assets/images/Coffee/Espresso.jpeg";
-import Espresso2 from "../assets/images/Coffee/Espresso2.jpeg";
-import Espresso3 from "../assets/images/Coffee/Espresso3.jpeg";
 import Cappuccino from "../assets/images/Coffee/Cappuccino.jpeg";
-import Cappuccino2 from "../assets/images/Coffee/Cappuccino2.jpeg";
-import Cappuccino3 from "../assets/images/Coffee/Cappuccino3.jpeg";
 import Latte from "../assets/images/Coffee/Latte.jpeg";
-import Latte2 from "../assets/images/Coffee/Latte2.jpeg";
-import Latte3 from "../assets/images/Coffee/Latte3.jpeg";
 import Mocha from "../assets/images/Coffee/Mocha.jpeg";
-import Mocha2 from "../assets/images/Coffee/Mocha2.jpeg";
-import Mocha3 from "../assets/images/Coffee/Mocha3.jpeg";
 import Macchiato from "../assets/images/Coffee/Macchiato.jpeg";
-import Macchiato2 from "../assets/images/Coffee/Macchiato2.jpeg";
-import Macchiato3 from "../assets/images/Coffee/Macchiato3.jpeg";
 
 import ChickenNoodles from "../assets/images/Noodles/ChickenNoodles.jpeg";
 import VegNoodles from "../assets/images/Noodles/VegNoodles.jpeg";
@@ -298,3 +268,5 @@ export const menuList = [
   { id: 113, name: "Fish Fry", price: 500, category: "Desi Food", status: "Available", img: fish1 },
   { id: 114, name: "Malai Tikka", price: 480, category: "Desi Food", status: "Available", img: MalaiTikka },
 ];
+
+export default menuList;

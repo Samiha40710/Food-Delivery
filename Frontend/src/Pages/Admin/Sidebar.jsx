@@ -1,4 +1,15 @@
-import { FiHome, FiUsers, FiLogOut, FiClipboard, FiSettings } from "react-icons/fi";
+import {
+  HiOutlineHome,
+  HiOutlineAdjustmentsHorizontal,
+  HiOutlineShoppingCart,
+  HiOutlineUserGroup,
+  HiOutlineRectangleGroup,
+  HiOutlineBriefcase,
+  HiOutlineEnvelopeOpen,
+  HiOutlineChatBubbleOvalLeft,
+  HiOutlineArrowRightOnRectangle,
+} from "react-icons/hi2";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/images/logo.PNG';
 
@@ -7,13 +18,14 @@ const Sidebar = () => {
 
   const linkClass = ({ isActive }) =>
     `flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 ${
-      isActive ? "bg-orange-100 text-orange-600 font-semibold" : "hover:bg-gray-100 text-gray-700"
+      isActive
+        ? "bg-orange-100 text-orange-600 font-semibold"
+        : "hover:bg-gray-100 text-gray-700"
     }`;
 
-  // LOGOUT FUNCTION
   const handleLogout = () => {
-    localStorage.removeItem("token"); // clear login token
-    navigate("/login"); // redirect to login page
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -23,35 +35,48 @@ const Sidebar = () => {
         <img src={logo} alt="logo" />
       </h1>
 
-      {/* Sidebar links */}
+      {/* Sidebar Links */}
       <nav className="space-y-3">
         <NavLink to="/dashboard" end className={linkClass}>
-          <FiHome /> Dashboard
+          <HiOutlineHome /> Dashboard
         </NavLink>
-        <NavLink to="/dashboard/manage" className={linkClass}>
-          <FiSettings /> Manage
+
+        <NavLink to="/dashboard/menuitems" className={linkClass}>
+          <HiOutlineAdjustmentsHorizontal /> Menu Items
         </NavLink>
+
         <NavLink to="/dashboard/orders" className={linkClass}>
-          <FiClipboard /> Orders
+          <HiOutlineShoppingCart /> Orders
         </NavLink>
+
         <NavLink to="/dashboard/customers" className={linkClass}>
-          <FiUsers /> Customers
+          <HiOutlineUserGroup /> Customers
         </NavLink>
+
         <NavLink to="/dashboard/dishes" className={linkClass}>
-          <FiClipboard /> Dishes
+          <HiOutlineRectangleGroup /> Dishes
         </NavLink>
+
         <NavLink to="/dashboard/sellers" className={linkClass}>
-          <FiClipboard /> Sellers
+          <HiOutlineBriefcase /> Sellers
+        </NavLink>
+
+        <NavLink to="/dashboard/subscriber" className={linkClass}>
+          <HiOutlineEnvelopeOpen /> Subscribers
+        </NavLink>
+
+        <NavLink to="/dashboard/contact" className={linkClass}>
+          <HiOutlineChatBubbleOvalLeft /> Contact Messages
         </NavLink>
       </nav>
 
       {/* Logout */}
       <div className="absolute bottom-5 left-5">
         <button
-          onClick={handleLogout} // attach logout function
+          onClick={handleLogout}
           className="flex items-center gap-3 text-red-600 font-semibold hover:text-red-700 transition-colors"
         >
-          <FiLogOut /> Logout
+          <HiOutlineArrowRightOnRectangle /> Logout
         </button>
       </div>
     </div>

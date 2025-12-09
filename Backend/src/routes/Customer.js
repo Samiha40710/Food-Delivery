@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Customer = require("../models/Customer");
 
-// GET all customers
 router.get("/", async (req, res) => {
   try {
     const customers = await Customer.find();
@@ -12,7 +11,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET single customer by ID
 router.get("/:id", async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id);
@@ -23,7 +21,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// POST new customer
 router.post("/", async (req, res) => {
   const { name, phone, email, status } = req.body;
   try {
@@ -35,7 +32,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT / Update customer
 router.put("/:id", async (req, res) => {
   try {
     const customer = await Customer.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -46,7 +42,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE customer
 router.delete("/:id", async (req, res) => {
   try {
     const customer = await Customer.findByIdAndDelete(req.params.id);

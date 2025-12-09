@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
+import axios from "axios";
 import fastfood from "../../assets/images/fastfood.jpeg";
 import desifood from "../../assets/images/desifood.jpeg";
 import snacks from "../../assets/images/snacks.jpeg";
@@ -9,7 +10,8 @@ import drinks from "../../assets/images/drinks.jpeg";
 import desserts from "../../assets/images/desserts.jpeg";
 import bbq from "../../assets/images/bbq.jpeg";
 
-const categories = [
+// Existing static categories
+const initialCategories = [
   { name: "Fast Food", image: fastfood, link: "/mega-menu" },
   { name: "Desi Food", image: desifood, link: "/mega-menu" },
   { name: "Snacks", image: snacks, link: "/mega-menu" },
@@ -20,8 +22,31 @@ const categories = [
 ];
 
 const FoodMenu = () => {
+  const [categories, setCategories] = useState(initialCategories);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    const fetchDishes = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/dishes"); // backend API
+        const dishes = res.data;
+
+        // Map dishes to categories with image
+        const dishCategories = dishes.map(d => ({ name: d.category, image: d.img, link: "/mega-menu" }));
+
+        // Merge with existing categories and remove duplicates
+        const merged = [...initialCategories, ...dishCategories];
+        const uniqueCategories = Array.from(new Map(merged.map(item => [item.name, item])).values());
+
+        setCategories(uniqueCategories);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchDishes();
+  }, []);
 
   return (
     <div
@@ -46,23 +71,19 @@ const FoodMenu = () => {
             transition={{ duration: 0.6, delay: index * 0.15 }}
             className="group relative overflow-hidden rounded-3xl shadow-lg cursor-pointer"
           >
-            {/* Image */}
             <img
               src={item.image}
               alt={item.name}
               className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-            {/* Text Overlay */}
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-2xl font-bold">{item.name}</h3>
               <p className="text-sm mt-1">Fresh & delicious</p>
             </div>
 
-            {/* Clickable Link */}
             <Link to={item.link} className="absolute inset-0 z-10"></Link>
           </motion.div>
         ))}

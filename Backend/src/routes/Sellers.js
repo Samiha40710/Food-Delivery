@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Seller = require("../models/Seller");
 
-// POST new seller
 router.post("/", async (req, res) => {
   const { name, email, phone, status } = req.body;
   if (!name || !email || !phone) {
@@ -22,7 +21,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET all sellers
 router.get("/", async (req, res) => {
   try {
     const sellers = await Seller.find();
@@ -32,7 +30,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET single seller by ID
 router.get("/:id", async (req, res) => {
   try {
     const seller = await Seller.findById(req.params.id);
@@ -43,7 +40,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// PUT / Update seller
 router.put("/:id", async (req, res) => {
   try {
     const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -54,7 +50,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE seller
 router.delete("/:id", async (req, res) => {
   try {
     const seller = await Seller.findByIdAndDelete(req.params.id);

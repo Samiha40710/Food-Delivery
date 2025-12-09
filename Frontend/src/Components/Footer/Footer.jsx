@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { FaPhoneAlt, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Footer = () => {
     const ref = useRef(null);
@@ -17,26 +18,22 @@ const Footer = () => {
         }
 
         try {
-            const res = await fetch("http://localhost:3000/api/subscribe", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-            });
+            const res = await axios.post("http://localhost:3000/api/subscribe", { email });
 
-            const data = await res.json();
-
-            if (res.ok) {
+            if (res.status === 201) {
                 setMessage("Subscribed successfully!");
                 setEmail("");
-            } else {
-                setMessage(data.error || "Subscription failed!");
             }
         } catch (err) {
             console.error(err);
-            setMessage("Something went wrong!");
+            if (err.response && err.response.data && err.response.data.message) {
+                setMessage(err.response.data.message);
+            } else {
+                setMessage("Something went wrong!");
+            }
         }
 
-        setTimeout(() => setMessage(""), 3000); // Clear message after 3s
+        setTimeout(() => setMessage(""), 3000);
     };
 
     return (
@@ -48,14 +45,12 @@ const Footer = () => {
             className="bg-white pt-12 pb-6 border-t mt-20"
         >
             <div className="container mx-auto px-6 md:px-16">
-                {/* TOP GRID */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.4, y: 50 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="grid grid-cols-1 md:grid-cols-5 gap-10"
                 >
-                    {/* About */}
                     <div>
                         <h3 className="font-semibold text-gray-900 mb-4">About</h3>
                         <ul className="space-y-2 text-gray-600">
@@ -72,7 +67,6 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Company */}
                     <div>
                         <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
                         <ul className="space-y-2 text-gray-600">
@@ -89,7 +83,6 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Support */}
                     <div>
                         <h3 className="font-semibold text-gray-900 mb-4">Support</h3>
                         <ul className="space-y-2 text-gray-600">
@@ -106,7 +99,6 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Get in touch */}
                     <div>
                         <h3 className="font-semibold text-gray-900 mb-4">Get in touch</h3>
                         <p className="text-gray-600">( +123 ) 456 789 123</p>
@@ -120,7 +112,6 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Subscribe Box */}
                     <div>
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
@@ -155,7 +146,6 @@ const Footer = () => {
                     </div>
                 </motion.div>
 
-                {/* BOTTOM COPYRIGHT */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.4, y: 30 }}

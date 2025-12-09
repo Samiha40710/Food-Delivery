@@ -7,7 +7,6 @@ const HelpPage = () => {
 
   return (
     <div className="w-full min-h-screen bg-[rgb(255,243,224)] py-16 px-6 lg:px-24 mt-22" ref={ref}>
-      {/* Page Title */}
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -17,7 +16,6 @@ const HelpPage = () => {
         Help Center
       </motion.h1>
 
-      {/* FAQs Section */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -62,7 +60,6 @@ const HelpPage = () => {
         ))}
       </motion.div>
 
-      {/* Contact Support */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}

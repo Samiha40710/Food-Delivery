@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import avatarImg from "../../assets/images/avatar.png"; // aapka avatar
+import axios from "axios";
+import avatarImg from "../../assets/images/avatar.png";
 
 const menuData = {
   main: [
@@ -13,9 +14,35 @@ const menuData = {
   ],
 };
 
-const Mobile = ({ open, active, setActive }) => {
-  const hoverTextColor = "hover:text-[rgb(245,130,32)]";
-  const activeTextColor = "text-[rgb(245,130,32)]";
+const Mobile = ({ open, active, setActive, setOpen }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // ya user info
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const scrollTop = () => window.scrollTo(0, 0);
+
+  const handleClick = (name) => {
+    setActive(name);
+    scrollTop();
+    setOpen(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3000/api/logout");
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
+      setOpen(false);
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      alert("Logout failed!");
+    }
+  };
 
   return (
     <div
@@ -24,39 +51,45 @@ const Mobile = ({ open, active, setActive }) => {
       }`}
     >
       <ul className="flex flex-col gap-4 px-4 font-medium">
-        {/* MAIN LINKS */}
         {menuData.main.map((item) => (
           <li
             key={item.name}
-            className={`cursor-pointer ${active === item.name ? activeTextColor : hoverTextColor}`}
-            onClick={() => setActive(item.name)}
+            className={`cursor-pointer ${
+              active === item.name
+                ? "text-[rgb(245,130,32)]"
+                : "hover:text-[rgb(245,130,32)]"
+            }`}
+            onClick={() => handleClick(item.name)}
           >
             <Link to={item.link}>{item.name}</Link>
           </li>
         ))}
 
         {/* Avatar Dropdown */}
-        <div className="relative mt-3">
+        <div className="relative mt-3 group mx-auto">
           <img
             src={avatarImg}
             alt="User Avatar"
-            className="w-12 h-12 rounded-full cursor-pointer object-cover mx-auto"
+            className="w-12 h-12 rounded-full cursor-pointer object-cover"
           />
-          <ul className="mt-2 bg-white shadow-lg rounded-md py-2 w-40 mx-auto flex flex-col gap-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <ul className="mt-2 bg-white shadow-lg rounded-md py-2 w-40 flex flex-col gap-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             <li className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer">
               <MagnifyingGlassIcon className="w-5" />
               <span>Search</span>
             </li>
-            <Link to="/login">
-              <li className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer">
-                Login
-              </li>
-            </Link>
-            <Link to="/logout">
-              <li className="flex items-center gap-2 p-2 hover:bg-gray-100 cursor-pointer">
+
+            {!isLoggedIn ? (
+              <Link to="/login" onClick={() => setOpen(false)}>
+                <li className="p-2 hover:bg-gray-100 cursor-pointer">Login</li>
+              </Link>
+            ) : (
+              <li
+                className="p-2 hover:bg-gray-100 cursor-pointer"
+                onClick={handleLogout}
+              >
                 Logout
               </li>
-            </Link>
+            )}
           </ul>
         </div>
       </ul>

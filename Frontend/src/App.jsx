@@ -50,8 +50,6 @@ function App() {
         <Route path='/faq' element={<FAQPage />} />
         <Route path='/services' element={<ServicesPage />} />
         <Route path='/ordernow' element={<OrderNow />} />
-
-        {/* Dashboard / Admin Protected Routes */}
         <Route path="/dashboard/*" element={<DashboardRoutes />} />
       </Routes>
 

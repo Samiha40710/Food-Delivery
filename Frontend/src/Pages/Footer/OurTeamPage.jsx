@@ -39,7 +39,6 @@ const OurTeamPage = () => {
 
   return (
     <div className="w-full min-h-screen bg-[rgb(255,243,224)] py-16 px-6 lg:px-24 mt-22" ref={ref}>
-      {/* Page Title */}
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -49,7 +48,6 @@ const OurTeamPage = () => {
         Our Team
       </motion.h1>
 
-      {/* Team Cards */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
